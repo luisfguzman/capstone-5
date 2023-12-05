@@ -1,0 +1,29 @@
+---
+- name: Install Docker on EC2
+  hosts: docker_server
+  become: yes
+  become_user: root
+  tasks:
+  - name: Make sure docker and docker-compose are available
+    yum:
+      name:
+      - python3-pip
+      - docker
+      update_cache: yes
+      state: present
+  - name: Install docker-compose
+    get_url:
+      url: https://github.com/docker/compose/releases/latest/download/docker-compose-Linux-{{lookup('pipe', 'uname -m')}}
+      dest: /usr/local/bin/docker-compose
+      mode: +x
+  - name: Ensure docker daemon is running
+    systemd:
+      name: docker
+      state: started
+  - name: Install docker python module
+    become: yes
+    become_user: ec2-user
+    pip:
+      name:
+      - docker
+      - docker-compose

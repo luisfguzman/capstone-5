@@ -1,0 +1,8 @@
+vpc_cidr_block = "10.0.0.0/16"
+subnet_1_cidr_block = "10.0.1.0/24"
+avail_zone = "us-east-2b"
+env_prefix = "dev"
+instance_type = "t2.micro"
+ssh_key = "C:\\Users\\luisf\\.ssh\\id_ed25519.pub"
+my_ip = "74.57.110.158/32"
+image_name = "al2023-ami-2023*-x86_64"
